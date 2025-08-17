@@ -5,10 +5,30 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Playball';
+    src: url('./assets/fonts/Playball/Playball-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
 * {
     font-family: 'Playfair_Display', Arial, sans-serif !important;
 }
 
 .v-application {
     background-color: #FFF6E4;
+}
+
+.btnPrimary {
+    background-color: #F3BB3B;
+    color: #5C4725;
+    font-size: 1.3em;
+}
+
+.btnSecondary {
+    border: 2px solid #5C4725;
+    background-color: rgba(0, 0, 0, 0);
+    color: #5C4725;
+    font-size: 1.3em;
 }
