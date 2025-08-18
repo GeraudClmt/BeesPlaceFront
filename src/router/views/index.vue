@@ -1,5 +1,6 @@
 <script setup>
 import {onMounted} from 'vue'
+import NavBar from '@/components/NavBar.vue'
 
 onMounted(() => {
     document.title = "BeesPlace"
@@ -8,6 +9,7 @@ onMounted(() => {
 
 <template>
     <v-app>
+        <NavBar />
         <v-main>
             <v-container>
                 <v-card class="mx-auto" max-width="400">
