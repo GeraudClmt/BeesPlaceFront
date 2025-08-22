@@ -12,7 +12,8 @@
     font-style: normal;
 }
 
-* {
+*,
+body {
     font-family: 'Playfair_Display', Arial, sans-serif !important;
 }
 
