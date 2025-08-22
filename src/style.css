@@ -23,13 +23,12 @@ body {
 
 .btnPrimary {
     background-color: #F3BB3B;
+    font-weight: bold;
     color: #5C4725;
-    font-size: 1.3em;
 }
 
 .btnSecondary {
     border: 2px solid #5C4725;
     background-color: rgba(0, 0, 0, 0);
     color: #5C4725;
-    font-size: 1.3em;
 }

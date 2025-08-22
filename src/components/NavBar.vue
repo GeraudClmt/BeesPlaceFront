@@ -6,7 +6,7 @@
           <img src="@/assets/PNG/Logo.png" alt="logo" class="logo" />
         </router-link>
       </v-col>
-      <v-col cols="4" class="d-flex justify-center align-end text-center title">
+      <v-col cols="4" class="d-flex justify-center align-end text-center">
         <p class="text-h6">Aider nos apiculteurs</p>
       </v-col>
       <v-col
@@ -85,9 +85,6 @@ onUnmounted(() => {
   width: 7em;
 }
 
-.title {
-  color: #5c4725;
-}
 
 .logoMenu {
   width: 2.7em;
@@ -112,7 +109,7 @@ onUnmounted(() => {
 
 .menuLink {
   text-decoration: none;
-  color: #5c4725;
+  color: black;
   padding: 0;
 }
 
