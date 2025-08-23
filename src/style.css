@@ -32,3 +32,8 @@ body {
     background-color: rgba(0, 0, 0, 0);
     color: #5C4725;
 }
+
+.fontPlayball {
+    font-size: 1.4em;
+    font-family: 'Playball', Arial, sans-serif !important;
+}
