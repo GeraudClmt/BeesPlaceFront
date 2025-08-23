@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from "vue";
 import NavBar from "@/components/NavBar.vue";
+import Footer from "@/components/Footer.vue";
 
 onMounted(() => {
   document.title = "BeesPlace";
@@ -12,10 +13,9 @@ onMounted(() => {
     <NavBar />
     <v-main>
       <v-container>
-
         <v-row class="d-flex justify-center">
           <v-col cols="11">
-            <h2 class="subtitle text-center">
+            <h2 class="underline text-center">
               <img src="@/assets/SVG/Ruche.svg" alt="Image d'une Ruche" class="imgSubtitle" />
               Mettez votre terrain aux services des abeilles
             </h2>
@@ -26,7 +26,7 @@ onMounted(() => {
             <img class="firstLittleBee" src="@/assets/SVG/Petite_abeille.svg" alt="Image petite abeille" />
             <img class="secondeLittleBee" src="@/assets/SVG/Petite_abeille.svg" alt="Image petite abeille" />
             <p>
-              Les abeiles jouent un rôle essentiel dans la pollinisation, mais
+              Les abeilles jouent un rôle essentiel dans la pollinisation, mais
               elles disparaissent à un rythme alarmant.
             </p>
           </v-col>
@@ -57,7 +57,7 @@ onMounted(() => {
           </v-col>
         </v-row>
         <v-row class="d-flex justify-center mt-16">
-          <v-col cols="3" class="position-relative" >
+          <v-col cols="3" class="position-relative">
             <img class="firstBee" width="50em" src="@/assets/SVG/Logo_abeille.svg" alt="Image abeille" />
           </v-col>
           <v-col cols="6" class="text-center">
@@ -67,8 +67,59 @@ onMounted(() => {
             <img width="50em" src="@/assets/SVG/Logo_abeille.svg" alt="Image abeille" />
           </v-col>
         </v-row>
+        <v-row class="d-flex justify-center">
+          <v-col cols="11" md="6">
+            <p>-Un apiculteur pose une annonce</p>
+            <p>-Un particulier contact un apiculteur</p>
+            <p>-Trouver un accord, financier ou troc</p>
+            <p>-Laisser travailler les abeilles</p>
+          </v-col>
+        </v-row>
+        <v-row class="d-flex justify-center">
+          <v-col cols="11" md="6">
+            <img class="imgBees" src="@/assets/Photos/Photo_ruche.jpg" alt="Image d'abeilles" />
+          </v-col>
+        </v-row>
+        <v-row class="d-flex justify-center text-center">
+          <v-col cols="10">
+            <h2>Les avantages</h2>
+          </v-col>
+        </v-row>
+        <v-row class="d-flex justify-center">
+          <v-col cols="3" class="text-end">
+            <img width="80" src="@/assets/SVG/Pot_de_miel.svg" alt="Image pot de miel" />
+          </v-col>
+          <v-col cols="9" md="4">
+            <p class="underline">Pour les propriétaires de terrain :</p>
+            <p>-Valoriser un espace inutilisé</p>
+            <p>-Contribuer à la préservation de l'environnement</p>
+          </v-col>
+        </v-row>
+        <v-row class="d-flex justify-center">
+          <v-col cols="9" md="4">
+            <p class="underline">Pour les apiculteurs :</p>
+            <p>-Trouver un emplacement proche</p>
+            <p>-Développer votre activité</p>
+            <p>-Gagner du temps et sécuriser vos ruches</p>
+          </v-col>
+          <v-col cols="3">
+            <img width="80" src="@/assets/SVG/Nid_abeilles.svg" alt="Image d'une ruche" />
+          </v-col>
+        </v-row>
+        <v-row class="d-flex justify-center text-center mt-16">
+          <v-col cols="10">
+            <p class="fontPlayball">🐝Nous croyons à une apiculture durable, locale et respectueuse.<br>Chaque terain contribue à la survie
+              des pollinisateurs.</p>
+          </v-col>
+        </v-row>
+        <v-row class="d-flex justify-center">
+          <v-col cols="10" class="text-center">
+            <v-btn class="btnPrimary">Trouver un apiculteur</v-btn>
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
+    <Footer />
   </v-app>
 </template>
 
@@ -78,7 +129,7 @@ onMounted(() => {
   width: 1.5em;
 }
 
-.subtitle {
+.underline {
   text-decoration: underline;
 }
 
@@ -109,12 +160,20 @@ onMounted(() => {
   width: 3em;
 }
 
-.firstBee{
+.firstBee {
   transform: scaleX(-1);
   position: absolute;
   left: 4em;
   top: -1em;
 }
+
+.imgBees {
+  width: 100%;
+  object-fit: cover;
+  border: solid #5C4725 3px;
+  border-radius: 15px;
+}
+
 @media (min-width: 500px) {
   .firstLittleBee {
     left: 85vw;
