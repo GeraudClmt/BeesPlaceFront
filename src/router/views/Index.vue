@@ -16,15 +16,27 @@ onMounted(() => {
         <v-row class="d-flex justify-center">
           <v-col cols="11">
             <h2 class="underline text-center">
-              <img src="@/assets/SVG/Ruche.svg" alt="Image d'une Ruche" class="imgSubtitle" />
+              <img
+                src="@/assets/SVG/Ruche.svg"
+                alt="Image d'une Ruche"
+                class="imgSubtitle"
+              />
               Mettez votre terrain aux services des abeilles
             </h2>
           </v-col>
         </v-row>
         <v-row class="text-center d-flex justify-center">
           <v-col cols="10">
-            <img class="firstLittleBee" src="@/assets/SVG/Petite_abeille.svg" alt="Image petite abeille" />
-            <img class="secondeLittleBee" src="@/assets/SVG/Petite_abeille.svg" alt="Image petite abeille" />
+            <img
+              class="firstLittleBee"
+              src="@/assets/SVG/Petite_abeille.svg"
+              alt="Image petite abeille"
+            />
+            <img
+              class="secondeLittleBee"
+              src="@/assets/SVG/Petite_abeille.svg"
+              alt="Image petite abeille"
+            />
             <p>
               Les abeilles jouent un rôle essentiel dans la pollinisation, mais
               elles disparaissent à un rythme alarmant.
@@ -32,7 +44,11 @@ onMounted(() => {
           </v-col>
         </v-row>
         <v-row class="mt-5">
-          <img src="@/assets/Photos/Photo_fleurs.jpg" alt="Image de fleurs" class="imgFlowers" />
+          <img
+            src="@/assets/Photos/Photo_fleurs.jpg"
+            alt="Image de fleurs"
+            class="imgFlowers"
+          />
         </v-row>
         <v-row class="mt5 d-flex justify-center">
           <v-col cols="10">
@@ -45,10 +61,17 @@ onMounted(() => {
         </v-row>
         <v-row class="d-flex justify-end mt-0">
           <v-col cols="8">
-            <p>C'est une action simple, directe et concrète pour préserver la biodiversité.</p>
+            <p>
+              C'est une action simple, directe et concrète pour préserver la
+              biodiversité.
+            </p>
           </v-col>
           <v-col cols="3" class="pa-0 ma-0">
-            <img class="imgPot" src="@/assets/SVG/Pot_de_fleurs.svg" alt="Image pot de fleurs" />
+            <img
+              class="imgPot"
+              src="@/assets/SVG/Pot_de_fleurs.svg"
+              alt="Image pot de fleurs"
+            />
           </v-col>
         </v-row>
         <v-row class="d-flex justify-center">
@@ -58,13 +81,22 @@ onMounted(() => {
         </v-row>
         <v-row class="d-flex justify-center mt-16">
           <v-col cols="3" class="position-relative">
-            <img class="firstBee" width="50em" src="@/assets/SVG/Logo_abeille.svg" alt="Image abeille" />
+            <img
+              class="firstBee"
+              width="50em"
+              src="@/assets/SVG/Logo_abeille.svg"
+              alt="Image abeille"
+            />
           </v-col>
           <v-col cols="6" class="text-center">
             <h2>Comment ça marche ?</h2>
           </v-col>
           <v-col cols="3">
-            <img width="50em" src="@/assets/SVG/Logo_abeille.svg" alt="Image abeille" />
+            <img
+              width="50em"
+              src="@/assets/SVG/Logo_abeille.svg"
+              alt="Image abeille"
+            />
           </v-col>
         </v-row>
         <v-row class="d-flex justify-center">
@@ -77,7 +109,11 @@ onMounted(() => {
         </v-row>
         <v-row class="d-flex justify-center">
           <v-col cols="11" md="6">
-            <img class="imgBees" src="@/assets/Photos/Photo_ruche.jpg" alt="Image d'abeilles" />
+            <img
+              class="imgBees"
+              src="@/assets/Photos/Photo_ruche.jpg"
+              alt="Image d'abeilles"
+            />
           </v-col>
         </v-row>
         <v-row class="d-flex justify-center text-center">
@@ -87,7 +123,11 @@ onMounted(() => {
         </v-row>
         <v-row class="d-flex justify-center">
           <v-col cols="3" class="text-end">
-            <img width="80" src="@/assets/SVG/Pot_de_miel.svg" alt="Image pot de miel" />
+            <img
+              width="80"
+              src="@/assets/SVG/Pot_de_miel.svg"
+              alt="Image pot de miel"
+            />
           </v-col>
           <v-col cols="9" md="4">
             <p class="underline">Pour les propriétaires de terrain :</p>
@@ -103,13 +143,20 @@ onMounted(() => {
             <p>-Gagner du temps et sécuriser vos ruches</p>
           </v-col>
           <v-col cols="3">
-            <img width="80" src="@/assets/SVG/Nid_abeilles.svg" alt="Image d'une ruche" />
+            <img
+              width="80"
+              src="@/assets/SVG/Nid_abeilles.svg"
+              alt="Image d'une ruche"
+            />
           </v-col>
         </v-row>
         <v-row class="d-flex justify-center text-center mt-16">
           <v-col cols="10">
-            <p class="fontPlayball">🐝Nous croyons à une apiculture durable, locale et respectueuse.<br>Chaque terain contribue à la survie
-              des pollinisateurs.</p>
+            <p class="fontPlayball">
+              🐝Nous croyons à une apiculture durable, locale et
+              respectueuse.<br />Chaque terain contribue à la survie des
+              pollinisateurs.
+            </p>
           </v-col>
         </v-row>
         <v-row class="d-flex justify-center">
@@ -170,7 +217,7 @@ onMounted(() => {
 .imgBees {
   width: 100%;
   object-fit: cover;
-  border: solid #5C4725 3px;
+  border: solid #5c4725 3px;
   border-radius: 15px;
 }
 
