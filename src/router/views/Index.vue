@@ -2,10 +2,14 @@
 import { onMounted } from "vue";
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
+import { useUserStore } from "@/stores/useUserStore";
 
 onMounted(() => {
   document.title = "BeesPlace";
 });
+
+const userStore = useUserStore();
+userStore.setToken("Nouveau token");
 </script>
 
 <template>
@@ -13,6 +17,7 @@ onMounted(() => {
     <NavBar />
     <v-main>
       <v-container>
+        <h1>{{ userStore.getToken }}</h1>
         <v-row class="d-flex justify-center">
           <v-col cols="11">
             <h2 class="underline text-center">

@@ -62,7 +62,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
 const items = [
-  { title: "Profil", link: "/" },
+  { title: "Connexion", link: "/login" },
   { title: "Cathalogue", link: "/" },
   { title: "Contact", link: "/" },
 ];
@@ -84,7 +84,6 @@ onUnmounted(() => {
 .logo {
   width: 7em;
 }
-
 
 .logoMenu {
   width: 2.7em;
