@@ -27,11 +27,15 @@
 
           <v-list>
             <v-list-item
-              v-for="(item, index) in items"
+              v-for="(item, index) in routeList"
               :key="index"
               :value="index"
             >
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-title>
+                <router-link :to="item.link" class="menuLink">
+                  {{ item.title }}
+                </router-link>
+              </v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -41,13 +45,13 @@
           <v-col
             cols="4"
             class="pa-0"
-            v-for="(item, index) in items"
+            v-for="(item, index) in routeList"
             :key="index"
             :value="index"
           >
-            <router-link class="menuLink" :to="item.link">{{
-              item.title
-            }}</router-link>
+            <router-link class="menuLink" :to="item.link">
+              {{ item.title }}
+            </router-link>
           </v-col>
         </v-row>
       </v-col>
@@ -61,7 +65,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 
-const items = [
+const routeList = [
   { title: "Connexion", link: "/login" },
   { title: "Cathalogue", link: "/" },
   { title: "Contact", link: "/" },
