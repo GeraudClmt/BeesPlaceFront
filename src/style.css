@@ -21,6 +21,10 @@ body {
     background-color: #FFF6E4;
 }
 
+#app {
+    background-color: #FFF6E4;
+}
+
 .btnPrimary {
     background-color: #F3BB3B;
     font-weight: bold;
@@ -36,4 +40,18 @@ body {
 .fontPlayball {
     font-size: 1.4em;
     font-family: 'Playball', Arial, sans-serif !important;
+}
+
+.bgWhite {
+    background-color: white;
+}
+
+.inputLogin .v-field {
+    background-color: rgba(255, 246, 228, 0.5);
+    border-radius: 10px !important;
+    border: 3px solid #5C4725 !important;
+}
+
+#app {
+    background-color: #FFF6E4;
 }
