@@ -2,25 +2,21 @@
 import { useUserStore } from "@/stores/useUserStore";
 import Footer from "@/components/Footer.vue";
 import { ref } from "vue";
-import login from "@/services/login";
+import beesPlacesRequests from "@/services/beesPlacesRequests";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 const userStore = useUserStore();
-const email = ref();
-const password = ref();
+const email = ref("");
+const password = ref("");
 const isLoading = ref(false);
 const charginMessage = ref("Chargement en cours...");
 
 const rulesEmail = [
   (value) => !!value || "Required.",
-  (value) => (value && value.length >= 3) || "Min 3 characters",
   (value) => /.+@.+\..+/.test(value) || "Doit être un email valide",
 ];
-const rulesPassword = [
-  (value) => !!value || "Required.",
-  (value) => (value && value.length >= 3) || "Min 8 characters",
-];
+const rulesPassword = [(value) => !!value || "Required."];
 
 const connexion = () => {
   isLoading.value = true;
@@ -28,7 +24,10 @@ const connexion = () => {
 
   const fetchData = async () => {
     try {
-      const response = await login.login(email.value, password.value);
+      const response = await beesPlacesRequests.login(
+        email.value,
+        password.value
+      );
 
       userStore.setToken(response.data.token);
       if (response.status === 200) {
@@ -38,7 +37,16 @@ const connexion = () => {
         }, 3000);
       }
     } catch (error) {
-      charginMessage.value = error.response?.data?.message || "Erreur inconnue";
+      if (error.response && error.response.data && error.response.data.errors) {
+        const errorsObj = error.response.data.errors;
+        const firstField = Object.keys(errorsObj)[0];
+        const messages = errorsObj[firstField];
+        charginMessage.value = Array.isArray(messages) ? messages[0] : messages;
+      } else if (error.response.data.message) {
+        charginMessage.value = error.response.data.message;
+      } else {
+        charginMessage.value = "Une erreur inconnue est survenue";
+      }
     } finally {
       setTimeout(() => {
         isLoading.value = false;
@@ -47,6 +55,12 @@ const connexion = () => {
   };
 
   fetchData();
+};
+
+const pressEnter = () => {
+  if (email.value.trim() && password.value.trim()) {
+    connexion();
+  }
 };
 </script>
 
@@ -72,6 +86,7 @@ const connexion = () => {
               hide-details="auto"
               label="Email"
               class="inputLogin"
+              @keyup.enter="pressEnter"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -84,17 +99,20 @@ const connexion = () => {
               hide-details="auto"
               label="Mot de passe"
               class="inputLogin"
+              @keyup.enter="pressEnter"
             ></v-text-field>
           </v-col>
         </v-row>
         <v-row>
-          <router-link class="linkForgetPwd ml-4" to="/">
+          <router-link class="linkForgetPwd ml-4" to="/forgot">
             Mot de passe oublié ?
           </router-link>
         </v-row>
         <v-row class="shortPadding mt-10">
           <v-col cols="6" class="shortPadding">
-            <v-btn class="btnSecondary">Créer un compte</v-btn>
+            <v-btn class="btnSecondary" @click="() => router.push('/register')"
+              >Créer un compte</v-btn
+            >
           </v-col>
           <v-col cols="6" class="shortPadding">
             <v-btn
