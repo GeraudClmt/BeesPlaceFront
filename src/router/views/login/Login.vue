@@ -65,7 +65,7 @@ const pressEnter = () => {
 </script>
 
 <template>
-  <v-container class="fullScreen">
+  <v-container class="fullScreen mb-8">
     <v-row class="d-flex justify-center align-center text-center">
       <v-col>
         <router-link to="/">
@@ -152,7 +152,7 @@ const pressEnter = () => {
 }
 
 .fullScreen {
-  height: 94vh;
+  height: 100vh;
 }
 
 .progressCircular {
