@@ -3,6 +3,7 @@ import Accueil from "@/router/views/Index.vue"
 import Login from "@/router/views/login/Login.vue"
 import Register from '@/router/views/login/Register.vue'
 import ForgotPassword from '@/router/views/login/ForgotPassword.vue'
+import Catalog from "@/router/views/catalog/Catalog.vue"
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         path: '/forgot',
         name: 'Récupération du mot de passe',
         component: ForgotPassword
+    },
+    {
+        path: '/catalog',
+        name: 'Cathalogue',
+        component: Catalog
     }
 ]
 

@@ -20,5 +20,8 @@ export default {
         return beesPlaceAPI.post('/password/forgot', {
             email: email,
         })
+    },
+    getAnnouncements() {
+        return beesPlaceAPI.get('/announcement')
     }
 }

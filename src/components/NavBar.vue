@@ -4,7 +4,7 @@ import { useUserStore } from "@/stores/useUserStore";
 
 const userStore = useUserStore();
 const routeList = [
-  { title: "Cathalogue", link: "/" },
+  { title: "Cathalogue", link: "/catalog" },
   { title: "Contact", link: "/" },
   { title: "Connexion", link: "/login" },
 ];
