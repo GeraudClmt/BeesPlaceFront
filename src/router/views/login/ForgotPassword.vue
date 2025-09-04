@@ -61,62 +61,64 @@ const pressEnter = () => {
 </script>
 
 <template>
-  <v-container class="mb-7 fullScreen">
-    <v-row class="d-flex justify-center align-center text-center">
-      <v-col>
-        <router-link to="/">
-          <img src="@/assets/SVG/Logo_titre.svg" alt="Image du logo" />
-        </router-link>
-      </v-col>
-    </v-row>
-    <v-row class="d-flex justify-center align-center text-center">
-      <v-col class="bgWhite elevation-5 pa-6" cols="11" md="4">
-        <v-row>
-          <h1>Renvoie du mot de passe</h1>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-text-field
-              v-model="email"
-              :rules="rulesEmail"
-              hide-details="auto"
-              label="Email"
-              class="inputLogin"
-              @keyup.enter="pressEnter"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row class="shortPadding mt-10">
-          <v-col cols="6" class="shortPadding">
-            <v-btn class="btnSecondary" @click="() => router.push('/')"
-              >Annuler</v-btn
-            >
-          </v-col>
-          <v-col cols="6" class="shortPadding">
-            <v-btn
-              :disabled="!email ? true : false"
-              class="btnPrimary"
-              @click="forgotPassword"
-            >
-              Envoyer le mail
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
+  <v-app>
+    <v-container class="mb-7 fullScreen">
+      <v-row class="d-flex justify-center align-center text-center">
+        <v-col>
+          <router-link to="/">
+            <img src="@/assets/SVG/Logo_titre.svg" alt="Image du logo" />
+          </router-link>
+        </v-col>
+      </v-row>
+      <v-row class="d-flex justify-center align-center text-center">
+        <v-col class="bgWhite elevation-5 pa-6" cols="11" md="4">
+          <v-row>
+            <h1>Renvoie du mot de passe</h1>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-text-field
+                v-model="email"
+                :rules="rulesEmail"
+                hide-details="auto"
+                label="Email"
+                class="inputLogin"
+                @keyup.enter="pressEnter"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row class="shortPadding mt-10">
+            <v-col cols="6" class="shortPadding">
+              <v-btn class="btnSecondary" @click="() => router.push('/')"
+                >Annuler</v-btn
+              >
+            </v-col>
+            <v-col cols="6" class="shortPadding">
+              <v-btn
+                :disabled="!email ? true : false"
+                class="btnPrimary"
+                @click="forgotPassword"
+              >
+                Envoyer le mail
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
 
-    <div class="backGroundProgress" v-if="isLoading">
-      <v-progress-circular
-        class="progressCircular"
-        :size="70"
-        :width="7"
-        color="#5C4725"
-        indeterminate
-      ></v-progress-circular>
-      <p class="progressCircularText">{{ charginMessage }}</p>
-    </div>
-  </v-container>
-  <Footer />
+      <div class="backGroundProgress" v-if="isLoading">
+        <v-progress-circular
+          class="progressCircular"
+          :size="70"
+          :width="7"
+          color="#5C4725"
+          indeterminate
+        ></v-progress-circular>
+        <p class="progressCircularText">{{ charginMessage }}</p>
+      </div>
+    </v-container>
+    <Footer />
+  </v-app>
 </template>
 
 <style scooped>
