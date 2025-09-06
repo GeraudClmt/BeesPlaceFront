@@ -2,10 +2,16 @@
 import { onMounted } from "vue";
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
+import { useRouter } from "vue-router";
 
+const router = new useRouter();
 onMounted(() => {
   document.title = "BeesPlace";
 });
+
+const redirectToCatalog = () => {
+  router.push("/catalog");
+};
 </script>
 
 <template>
@@ -76,7 +82,9 @@ onMounted(() => {
         </v-row>
         <v-row class="d-flex justify-center">
           <v-col cols="10" class="text-center">
-            <v-btn class="btnPrimary">Trouver un apiculteur</v-btn>
+            <v-btn @click="redirectToCatalog" class="btnPrimary"
+              >Trouver un apiculteur</v-btn
+            >
           </v-col>
         </v-row>
         <v-row class="d-flex justify-center mt-16">
@@ -161,7 +169,9 @@ onMounted(() => {
         </v-row>
         <v-row class="d-flex justify-center">
           <v-col cols="10" class="text-center">
-            <v-btn class="btnPrimary">Trouver un apiculteur</v-btn>
+            <v-btn @click="redirectToCatalog" class="btnPrimary"
+              >Trouver un apiculteur</v-btn
+            >
           </v-col>
         </v-row>
       </v-container>
