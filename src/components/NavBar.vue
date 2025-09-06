@@ -1,3 +1,37 @@
+<script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+import { useUserStore } from "@/stores/useUserStore";
+
+const userStore = useUserStore();
+const routeList = [
+  { title: "Cathalogue", link: "/catalog" },
+  { title: "Contact", link: "/" },
+  { title: "Connexion", link: "/login" },
+];
+
+routeList[2] =
+  userStore.getToken == null
+    ? { title: "Connexion", link: "/login" }
+    : { title: "Deconnexion", link: "/login" };
+
+const screenWidth = ref(window.innerWidth);
+
+function handleResize() {
+  screenWidth.value = window.innerWidth;
+}
+onMounted(() => {
+  window.addEventListener("resize", handleResize);
+});
+onUnmounted(() => {
+  window.removeEventListener("resize", handleResize);
+});
+
+const removeAccessToken = () => {
+  userStore.removeToken();
+  window.location.reload();
+};
+</script>
+
 <template>
   <v-container>
     <v-row>
@@ -27,11 +61,21 @@
 
           <v-list>
             <v-list-item
-              v-for="(item, index) in items"
+              v-for="(item, index) in routeList"
               :key="index"
               :value="index"
             >
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-title>
+                <router-link
+                  :to="item.link"
+                  class="menuLink"
+                  @click="
+                    item.title === 'Deconnexion' ? removeAccessToken() : null
+                  "
+                >
+                  {{ item.title }}
+                </router-link>
+              </v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -41,13 +85,17 @@
           <v-col
             cols="4"
             class="pa-0"
-            v-for="(item, index) in items"
+            v-for="(item, index) in routeList"
             :key="index"
             :value="index"
           >
-            <router-link class="menuLink" :to="item.link">{{
-              item.title
-            }}</router-link>
+            <router-link
+              class="menuLink"
+              :to="item.link"
+              @click="item.title === 'Deconnexion' ? removeAccessToken() : null"
+            >
+              {{ item.title }}
+            </router-link>
           </v-col>
         </v-row>
       </v-col>
@@ -58,33 +106,10 @@
   </v-container>
 </template>
 
-<script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-
-const items = [
-  { title: "Profil", link: "/" },
-  { title: "Cathalogue", link: "/" },
-  { title: "Contact", link: "/" },
-];
-
-const screenWidth = ref(window.innerWidth);
-
-function handleResize() {
-  screenWidth.value = window.innerWidth;
-}
-onMounted(() => {
-  window.addEventListener("resize", handleResize);
-});
-onUnmounted(() => {
-  window.removeEventListener("resize", handleResize);
-});
-</script>
-
 <style scoped>
 .logo {
   width: 7em;
 }
-
 
 .logoMenu {
   width: 2.7em;
