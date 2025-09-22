@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import NavBar from "@/components/NavBar.vue";
+import Footer from "@/components/Footer.vue";
 import beesPlacesRequests from "@/services/beesPlacesRequests";
 import ProgressCircular from "@/components/ProgressCircular.vue";
 
@@ -49,20 +50,13 @@ fetchAnnoucements();
             <v-card-subtitle>{{ announcement.departement }}</v-card-subtitle>
             <v-card-text>{{ announcement.description }}</v-card-text>
 
-            <v-card-actions class="d-flex justify-space-between">
-              <v-btn
-                width="40%"
-                class="btnSecondary"
-                @click="editAnnouncement(announcement.id)"
-              >
-                Éditer
-              </v-btn>
+            <v-card-actions class="d-flex justify-center">
               <v-btn
                 width="40%"
                 class="btnPrimary"
                 @click="deleteAnnouncement(announcement.id)"
               >
-                Supprimer
+                Contacter
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -74,6 +68,7 @@ fetchAnnoucements();
         :chargingMessage="chargingMessage"
       />
     </v-container>
+    <Footer />
   </v-app>
 </template>
 
