@@ -23,5 +23,13 @@ export default {
     },
     getAnnouncements() {
         return beesPlaceAPI.get('/announcement')
+    },
+    getUserProfil(token) {
+        beesPlaceAPI.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        return beesPlaceAPI.get('/user')
+    },
+    getUserAnnouncements(token) {
+        beesPlaceAPI.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        return beesPlaceAPI.get('/announcement/show')
     }
 }

@@ -3,16 +3,18 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { useUserStore } from "@/stores/useUserStore";
 
 const userStore = useUserStore();
-const routeList = [
+let routeList = [
   { title: "Cathalogue", link: "/catalog" },
   { title: "Contact", link: "/" },
   { title: "Connexion", link: "/login" },
 ];
 
-routeList[2] =
-  userStore.getToken == null
-    ? { title: "Connexion", link: "/login" }
-    : { title: "Deconnexion", link: "/login" };
+if (userStore.getToken != null) {
+  routeList.push({ title: "Profil", link: "/profil" });
+  routeList[2] = { title: "Deconnexion", link: "/login" };
+} else {
+  routeList[2] = { title: "Connexion", link: "/login" };
+}
 
 const screenWidth = ref(window.innerWidth);
 
