@@ -41,7 +41,7 @@ fetchAnnoucements();
         >
           <v-card>
             <v-img
-              :src="`http://192.168.1.200:8000/storage/${announcement.image_path}`"
+              :src="announcement.image_path"
               height="200"
               cover
             ></v-img>
