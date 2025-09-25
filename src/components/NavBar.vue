@@ -46,7 +46,7 @@ const removeAccessToken = () => {
         <p class="text-h6">Aider nos apiculteurs</p>
       </v-col>
       <v-col
-        v-if="screenWidth < 600"
+        v-if="screenWidth < 1000"
         cols="4"
         class="d-flex justify-end align-end"
       >
@@ -85,7 +85,7 @@ const removeAccessToken = () => {
       <v-col v-else cols="4" class="d-flex align-end">
         <v-row class="d-flex justify-center align-end text-center">
           <v-col
-            cols="4"
+            cols="3"
             class="pa-0"
             v-for="(item, index) in routeList"
             :key="index"
