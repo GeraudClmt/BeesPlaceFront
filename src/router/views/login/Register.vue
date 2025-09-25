@@ -156,7 +156,7 @@ const pressEnter = () => {
           <v-col cols="6" class="shortPadding">
             <v-btn
               :disabled="
-                !email || !password || !passwordConfirm || !name ? true : false
+                !email || !password || !passwordConfirm || !name || password !== passwordConfirm || password.length < 8 ? true : false
               "
               class="btnPrimary"
               @click="register"
