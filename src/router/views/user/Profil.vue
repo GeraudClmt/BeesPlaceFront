@@ -7,6 +7,7 @@
           <v-tabs v-model="tab" align-tabs="title">
             <v-tab text="Profil" value="profil"></v-tab>
             <v-tab text="Annonces" value="annonces"></v-tab>
+            <v-tab text="Ajouter une annonce" value="addAnnonce"></v-tab>
           </v-tabs>
 
           <v-row class="mt-6" v-if="tab === 'profil'">
@@ -54,6 +55,40 @@
               </v-row>
             </v-col>
           </v-row>
+          <v-row class="mt-6 d-flex justify-center" v-if="tab === 'addAnnonce'">
+            <p class="mt-6" v-if="name == null || mail == null">
+              Veuillez vous connecter
+            </p>
+            <v-col v-else md="6">
+              <v-form @submit.prevent>
+                <v-text-field
+                  v-model="firstName"
+                  :rules="rules"
+                  label="Titre"
+                  required
+                ></v-text-field>
+                <v-select
+                  v-model="select"
+                  :items="departementList"
+                  :rules="[v => !!v || 'Item is required']"
+                  label="Département"
+                  required
+                ></v-select>
+                <v-text-field
+                  v-model="firstName"
+                  :rules="rules"
+                  label="Description"
+                  required
+                ></v-text-field>
+                <v-file-input
+                  label="Charger la photo"
+                  prepend-icon="mdi-camera"
+                  variant="filled"
+                ></v-file-input>
+                <v-btn class="mt-2 btnPrimary" type="submit" block>Créer l'annonce</v-btn>
+              </v-form>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
       <ProgressCircular
@@ -82,6 +117,7 @@ const mail = ref();
 const isLoading = ref(true);
 const chargingMessage = ref("Chargement en cours...");
 const annoucementsList = ref();
+const departementList = ref(['Drome', 'Ardeche']);
 
 const fetchUserInfo = async () => {
   try {
