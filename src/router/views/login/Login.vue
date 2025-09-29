@@ -69,7 +69,7 @@ const pressEnter = () => {
 
 <template>
   <v-app>
-    <v-container class="fullScreen mb-8">
+    <v-container class="flex-grow-1">
       <v-row class="d-flex justify-center align-center text-center">
         <v-col>
           <router-link to="/">
@@ -152,7 +152,4 @@ const pressEnter = () => {
   padding-right: 2px !important;
 }
 
-.fullScreen {
-  height: 100vh;
-}
 </style>

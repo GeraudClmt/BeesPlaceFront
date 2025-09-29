@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <NavBar />
-    <v-container class="mb-8">
+    <v-container class="flex-grow-1">
       <v-row class="d-flex justify-center">
         <v-col class="bgWhite elevation-5 pa-6" cols="11" md="11">
           <v-tabs v-model="tab" align-tabs="title">
@@ -110,7 +110,6 @@ import { useRouter } from "vue-router";
 import ProgressCircular from "@/components/ProgressCircular.vue";
 
 const userStore = useUserStore();
-const router = useRouter();
 const tab = ref("profil");
 const name = ref();
 const mail = ref();

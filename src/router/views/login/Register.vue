@@ -79,7 +79,8 @@ const pressEnter = () => {
 </script>
 
 <template>
-  <v-container class="mb-7">
+  <v-app>
+  <v-container class="flex-grow-1">
     <v-row class="d-flex justify-center align-center text-center">
       <v-col>
         <router-link to="/">
@@ -180,6 +181,7 @@ const pressEnter = () => {
     </div>
   </v-container>
   <Footer />
+  </v-app>
 </template>
 
 <style scooped>

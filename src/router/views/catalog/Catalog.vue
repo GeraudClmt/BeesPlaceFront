@@ -30,7 +30,7 @@ fetchAnnoucements();
 <template>
   <v-app>
     <NavBar />
-    <v-container>
+    <v-container class="flex-grow-1">
       <v-row>
         <v-col
           cols="12"
@@ -73,4 +73,5 @@ fetchAnnoucements();
 </template>
 
 <style scoped>
+
 </style>

@@ -61,8 +61,8 @@ const pressEnter = () => {
 </script>
 
 <template>
-  <v-app>
-    <v-container class="mb-7 fullScreen">
+  <v-app >
+    <v-container class="flex-grow-1">
       <v-row class="d-flex justify-center align-center text-center">
         <v-col>
           <router-link to="/">
@@ -151,8 +151,6 @@ const pressEnter = () => {
   background-color: rgba(255, 246, 228, 0.9);
   height: 100vh;
   width: 100vw;
-}
-.fullScreen {
-  height: 90vh;
-}
+};
+
 </style>
