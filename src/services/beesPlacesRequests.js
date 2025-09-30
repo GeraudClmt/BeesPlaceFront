@@ -31,5 +31,13 @@ export default {
     getUserAnnouncements(token) {
         beesPlaceAPI.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         return beesPlaceAPI.get('/announcement/show')
+    },
+    createAnnouncement(token, formData){
+        beesPlaceAPI.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        return beesPlaceAPI.post('/announcement/create', formData)
+    },
+    deleteAnnouncement(token, formData){
+        beesPlaceAPI.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        return beesPlaceAPI.post('/announcement/delete', formData)
     }
 }
