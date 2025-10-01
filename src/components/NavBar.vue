@@ -4,14 +4,14 @@ import { useUserStore } from "@/stores/useUserStore";
 
 const userStore = useUserStore();
 let routeList = [
-  { title: "Cathalogue", link: "/catalog" },
+  { title: "Annonces", link: "/catalog" },
   { title: "Contact", link: "/" },
   { title: "Connexion", link: "/login" },
 ];
 
 if (userStore.getToken != null) {
-  routeList.push({ title: "Profil", link: "/profil" });
-  routeList[2] = { title: "Deconnexion", link: "/login" };
+  routeList[2] = { title: "Profil", link: "/profil" };
+  routeList.push({ title: "Deconnexion", link: "/login" });
 } else {
   routeList[2] = { title: "Connexion", link: "/login" };
 }
@@ -37,12 +37,12 @@ const removeAccessToken = () => {
 <template>
   <v-container>
     <v-row>
-      <v-col cols="4">
+      <v-col >
         <router-link to="/">
           <img src="@/assets/PNG/Logo.png" alt="logo" class="logo" />
         </router-link>
       </v-col>
-      <v-col cols="4" class="d-flex justify-center align-end text-center">
+      <v-col cols="3" class="d-flex justify-center align-end text-center">
         <p class="text-h6">Aider nos apiculteurs</p>
       </v-col>
       <v-col
@@ -82,10 +82,9 @@ const removeAccessToken = () => {
           </v-list>
         </v-menu>
       </v-col>
-      <v-col v-else cols="4" class="d-flex align-end">
-        <v-row class="d-flex justify-center align-end text-center">
+      <v-col v-else class="d-flex align-end">
+        <v-row class="d-flex justify-end align-end">
           <v-col
-            cols="3"
             class="pa-0"
             v-for="(item, index) in routeList"
             :key="index"
@@ -102,8 +101,10 @@ const removeAccessToken = () => {
         </v-row>
       </v-col>
     </v-row>
-    <v-row class="d-flex justify-center">
-      <hr class="horizontalLigne" />
+    <v-row no-gutters class="mt-4">
+      <v-col cols="12" class="pe-0">
+        <hr class="horizontalLigne" />
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -127,11 +128,10 @@ const removeAccessToken = () => {
 }
 
 .horizontalLigne {
-  width: 95%;
+  width: 100%;
   border: none;
   height: 3px;
   background-color: #5c4725;
-  margin: auto;
 }
 
 .menuLink {
