@@ -35,17 +35,3 @@ src/
 public/
   index.html           # Point d'entrée HTML (balise <title>)
 ```
-
-## Personnalisation de la police
-Les fontes personnalisées sont placées dans `src/assets/fonts/`. La police "Playfair_Display" est appliquée globalement via `src/style.css` et sur l'ensemble de l'UI Vuetify.
-
-## Surcharges du thème
-- Le `background-color` global est appliqué via le CSS sur `.v-application` et `body`.
-- Le font-family global est assuré en CSS et/OU via la config de Vuetify si besoin.
-
----
-
-**Pour toute personnalisation :**
-- Change le titre dans `public/index.html`.
-- Modifie la police dans `src/assets/fonts/` et `src/style.css`.
-- Adapte la config theme ou defaults dans `main.js` si besoin.
