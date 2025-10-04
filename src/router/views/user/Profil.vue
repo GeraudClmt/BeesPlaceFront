@@ -1,3 +1,137 @@
+<script setup>
+import NavBar from "@/components/NavBar.vue";
+import Footer from "@/components/Footer.vue";
+import { ref, onMounted, watch } from "vue";
+import { useUserStore } from "@/stores/useUserStore";
+import beesPlacesRequests from "@/services/beesPlacesRequests";
+import ProgressCircular from "@/components/ProgressCircular.vue";
+import LogoAbeille from "@/assets/SVG/Logo_abeille.svg";
+
+const userStore = useUserStore();
+const tab = ref("profil");
+const name = ref();
+const mail = ref();
+const isLoading = ref(true);
+const chargingMessage = ref("Chargement en cours...");
+const annoucementsList = ref();
+const departementList = ref(['Drome', 'Ardeche']);
+const dialog = ref(false);
+const dialogMessage = ref();
+const dialogTitle = ref();
+
+const inputTittle = ref();
+const inputDepartment = ref();
+const inputDescription = ref();
+const inputFile = ref();
+
+
+const fetchUserInfo = async () => {
+  try {
+    isLoading.value = true;
+    const response = await beesPlacesRequests.getUserProfil(userStore.getToken);
+    name.value = response.data.name;
+    mail.value = response.data.email;
+    if (response.status === 200) {
+      chargingMessage.value = "Récupération des données réussie";
+    }
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.errors) {
+      const errorsObj = error.response.data.errors;
+      const firstField = Object.keys(errorsObj)[0];
+      const messages = errorsObj[firstField];
+      chargingMessage.value = Array.isArray(messages) ? messages[0] : messages;
+    } else if (error.response.data.message) {
+      chargingMessage.value = error.response.data.message;
+    } else {
+      chargingMessage.value = "Une erreur inconnue est survenue";
+    }
+  } finally {
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 3000);
+  }
+};
+
+const fetchUserAnnoucements = async () => {
+  isLoading.value = true;
+  try {
+    const response = await beesPlacesRequests.getUserAnnouncements(
+      userStore.getToken
+    );
+    annoucementsList.value = response.data.annonces;
+
+    chargingMessage.value = "Réception des données...";
+  } catch (error) {
+    chargingMessage.value = "Erreur réception des données";
+  }
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 3000);
+};
+
+const requestsCreateAnnouncement = async () => {
+  try {
+    const formData = new FormData()
+    formData.append('title', inputTittle.value)
+    formData.append('departement', inputDepartment.value)
+    formData.append('description', inputDescription.value)
+    formData.append('image_path', inputFile.value)
+
+    const response = await beesPlacesRequests.createAnnouncement(userStore.getToken, formData)
+    
+    if(response.status == '200'){
+      dialogTitle.value = "Succès"
+      dialogMessage.value = response.data.message
+      dialog.value = true
+
+      inputTittle.value = ""
+      inputDepartment.value = ""
+      inputDescription.value = ""
+      inputFile.value = ""
+    }
+  }catch (error) {
+    dialogTitle.value = "Erreur"
+    dialogMessage.value = error.response.data.message
+    dialog.value = true
+  }
+}
+
+const deleteAnnouncement = async (annoucementID) => {
+  try{
+    const formData = new FormData()
+    formData.append('id', annoucementID)
+    const response = await beesPlacesRequests.deleteAnnouncement(userStore.getToken, formData)
+    
+    if(response.status == '200'){
+      dialogTitle.value = "Succès"
+      dialogMessage.value = response.data.message
+      dialog.value = true
+
+      fetchUserAnnoucements()
+
+      inputTittle.value = ""
+      inputDepartment.value = ""
+      inputDescription.value = ""
+      inputFile.value = ""
+    }
+  }catch(error){
+    dialogTitle.value = "Erreur"
+    dialogMessage.value = error.response.data.message
+    dialog.value = true
+  }
+}
+
+onMounted(() => {
+  fetchUserInfo();
+});
+
+watch(tab, (newTab) => {
+  if (newTab === "annonces") {
+    fetchUserAnnoucements();
+  }
+});
+</script>
+
 <template>
   <v-app>
     <NavBar />
@@ -136,141 +270,7 @@
   </v-app>
 </template>
 
-<script setup>
-import NavBar from "@/components/NavBar.vue";
-import Footer from "@/components/Footer.vue";
-import { ref, onMounted, watch } from "vue";
-import { useUserStore } from "@/stores/useUserStore";
-import beesPlacesRequests from "@/services/beesPlacesRequests";
-import ProgressCircular from "@/components/ProgressCircular.vue";
-import LogoAbeille from "@/assets/SVG/Logo_abeille.svg";
 
-const userStore = useUserStore();
-const tab = ref("profil");
-const name = ref();
-const mail = ref();
-const isLoading = ref(true);
-const chargingMessage = ref("Chargement en cours...");
-const annoucementsList = ref();
-const departementList = ref(['Drome', 'Ardeche']);
-const dialog = ref(false);
-const dialogMessage = ref();
-const dialogTitle = ref();
-
-const inputTittle = ref();
-const inputDepartment = ref();
-const inputDescription = ref();
-const inputFile = ref();
-
-
-const fetchUserInfo = async () => {
-  try {
-    isLoading.value = true;
-    const response = await beesPlacesRequests.getUserProfil(userStore.getToken);
-    name.value = response.data.name;
-    mail.value = response.data.email;
-    if (response.status === 200) {
-      chargingMessage.value = "Récupération des données réussie";
-    }
-  } catch (error) {
-    if (error.response && error.response.data && error.response.data.errors) {
-      const errorsObj = error.response.data.errors;
-      const firstField = Object.keys(errorsObj)[0];
-      const messages = errorsObj[firstField];
-      chargingMessage.value = Array.isArray(messages) ? messages[0] : messages;
-    } else if (error.response.data.message) {
-      chargingMessage.value = error.response.data.message;
-    } else {
-      chargingMessage.value = "Une erreur inconnue est survenue";
-    }
-  } finally {
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 3000);
-  }
-};
-
-const fetchUserAnnoucements = async () => {
-  isLoading.value = true;
-  try {
-    const response = await beesPlacesRequests.getUserAnnouncements(
-      userStore.getToken
-    );
-    annoucementsList.value = response.data.annonces;
-
-    chargingMessage.value = "Réception des données...";
-  } catch (error) {
-    chargingMessage.value = "Erreur réception des données";
-  }
-  setTimeout(() => {
-    isLoading.value = false;
-  }, 3000);
-};
-
-const requestsCreateAnnouncement = async () => {
-  try {
-    const formData = new FormData()
-    formData.append('title', inputTittle.value)
-    formData.append('departement', inputDepartment.value)
-    formData.append('description', inputDescription.value)
-    formData.append('image_path', inputFile.value)
-    
-    console.log(formData)
-
-    const response = await beesPlacesRequests.createAnnouncement(userStore.getToken, formData)
-    
-    if(response.status == '200'){
-      dialogTitle.value = "Succès"
-      dialogMessage.value = response.data.message
-      dialog.value = true
-
-      inputTittle.value = ""
-      inputDepartment.value = ""
-      inputDescription.value = ""
-      inputFile.value = ""
-    }
-  }catch (error) {
-    dialogTitle.value = "Erreur"
-    dialogMessage.value = error.response.data.message
-    dialog.value = true
-  }
-}
-
-const deleteAnnouncement = async (annoucementID) => {
-  try{
-    const formData = new FormData()
-    formData.append('id', annoucementID)
-    const response = await beesPlacesRequests.deleteAnnouncement(userStore.getToken, formData)
-    
-    if(response.status == '200'){
-      dialogTitle.value = "Succès"
-      dialogMessage.value = response.data.message
-      dialog.value = true
-
-      fetchUserAnnoucements()
-
-      inputTittle.value = ""
-      inputDepartment.value = ""
-      inputDescription.value = ""
-      inputFile.value = ""
-    }
-  }catch(error){
-    dialogTitle.value = "Erreur"
-    dialogMessage.value = error.response.data.message
-    dialog.value = true
-  }
-}
-
-onMounted(() => {
-  fetchUserInfo();
-});
-
-watch(tab, (newTab) => {
-  if (newTab === "annonces") {
-    fetchUserAnnoucements();
-  }
-});
-</script>
 
 <style scoped>
 .fullScreen {
