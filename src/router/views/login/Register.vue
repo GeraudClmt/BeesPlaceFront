@@ -48,7 +48,7 @@ const register = () => {
         charginMessage.value = "Création du compte réussite";
         setTimeout(() => {
           router.push("/");
-        }, 3000);
+        }, 500);
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
@@ -64,7 +64,7 @@ const register = () => {
     } finally {
       setTimeout(() => {
         isLoading.value = false;
-      }, 3000);
+      }, 500);
     }
   };
 

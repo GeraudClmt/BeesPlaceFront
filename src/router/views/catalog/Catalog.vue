@@ -21,7 +21,7 @@ const fetchAnnoucements = async () => {
   }
   setTimeout(() => {
     isLoading.value = false;
-  }, 3000);
+  }, 500);
 };
 
 fetchAnnoucements();
