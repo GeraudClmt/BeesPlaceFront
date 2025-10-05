@@ -30,7 +30,7 @@ const forgotPassword = () => {
         charginMessage.value = "Email envoyé";
         setTimeout(() => {
           router.push("/");
-        }, 3000);
+        }, 500);
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
@@ -46,7 +46,7 @@ const forgotPassword = () => {
     } finally {
       setTimeout(() => {
         isLoading.value = false;
-      }, 3000);
+      }, 500);
     }
   };
 
