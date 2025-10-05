@@ -6,6 +6,7 @@ import { useUserStore } from "@/stores/useUserStore";
 import beesPlacesRequests from "@/services/beesPlacesRequests";
 import ProgressCircular from "@/components/ProgressCircular.vue";
 import LogoAbeille from "@/assets/SVG/Logo_abeille.svg";
+import UpdateAnnouncement from "@/components/UpdateAnnouncement.vue";
 
 const userStore = useUserStore();
 const tab = ref("profil");
@@ -18,6 +19,9 @@ const departementList = ref(['Drome', 'Ardeche']);
 const dialog = ref(false);
 const dialogMessage = ref();
 const dialogTitle = ref();
+
+const isDialogUpdateAnnouncement = ref(false);
+const idUpdateAnnouncement = ref();
 
 const inputTittle = ref();
 const inputDepartment = ref();
@@ -48,7 +52,7 @@ const fetchUserInfo = async () => {
   } finally {
     setTimeout(() => {
       isLoading.value = false;
-    }, 3000);
+    }, 500);
   }
 };
 
@@ -66,7 +70,7 @@ const fetchUserAnnoucements = async () => {
   }
   setTimeout(() => {
     isLoading.value = false;
-  }, 3000);
+  }, 500);
 };
 
 const requestsCreateAnnouncement = async () => {
@@ -78,8 +82,8 @@ const requestsCreateAnnouncement = async () => {
     formData.append('image_path', inputFile.value)
 
     const response = await beesPlacesRequests.createAnnouncement(userStore.getToken, formData)
-    
-    if(response.status == '200'){
+
+    if (response.status == '200') {
       dialogTitle.value = "Succès"
       dialogMessage.value = response.data.message
       dialog.value = true
@@ -88,8 +92,10 @@ const requestsCreateAnnouncement = async () => {
       inputDepartment.value = ""
       inputDescription.value = ""
       inputFile.value = ""
+
+      tab.value = "annonces"
     }
-  }catch (error) {
+  } catch (error) {
     dialogTitle.value = "Erreur"
     dialogMessage.value = error.response.data.message
     dialog.value = true
@@ -97,12 +103,12 @@ const requestsCreateAnnouncement = async () => {
 }
 
 const deleteAnnouncement = async (annoucementID) => {
-  try{
+  try {
     const formData = new FormData()
     formData.append('id', annoucementID)
     const response = await beesPlacesRequests.deleteAnnouncement(userStore.getToken, formData)
-    
-    if(response.status == '200'){
+
+    if (response.status == '200') {
       dialogTitle.value = "Succès"
       dialogMessage.value = response.data.message
       dialog.value = true
@@ -114,11 +120,24 @@ const deleteAnnouncement = async (annoucementID) => {
       inputDescription.value = ""
       inputFile.value = ""
     }
-  }catch(error){
+  } catch (error) {
     dialogTitle.value = "Erreur"
     dialogMessage.value = error.response.data.message
     dialog.value = true
   }
+}
+
+const updateAnnouncement = (id) => {
+  isDialogUpdateAnnouncement.value = true
+  idUpdateAnnouncement.value = id
+}
+
+const refreshAnnouncements = (message) => {
+  isDialogUpdateAnnouncement.value = false
+  dialog.value = true
+  dialogTitle.value = "Succès"
+  dialogMessage.value = message
+  fetchUserAnnoucements()
 }
 
 onMounted(() => {
@@ -159,20 +178,14 @@ watch(tab, (newTab) => {
               Veuillez vous connecter
             </p>
             <v-col v-else>
+              <UpdateAnnouncement v-if="isDialogUpdateAnnouncement" @refreshAnnouncements="(message) => refreshAnnouncements(message)"
+                @closeDialog="(event) => isDialogUpdateAnnouncement = event" :id=idUpdateAnnouncement
+                :userToken="userStore.getToken" :departementList="departementList"
+                :isDialogActivate="isDialogUpdateAnnouncement" />
               <v-row>
-                <v-col
-                  cols="12"
-                  md="4"
-                  class="mb-5"
-                  v-for="annoucement in annoucementsList"
-                  :key="annoucement.id"
-                >
+                <v-col cols="12" md="4" class="mb-5" v-for="annoucement in annoucementsList" :key="annoucement.id">
                   <v-card>
-                    <v-img
-                      :src="`${annoucement.image_path}`"
-                      height="200"
-                      cover
-                    ></v-img>
+                    <v-img :src="`${annoucement.image_path}`" height="200" cover></v-img>
 
                     <v-card-title>{{ annoucement.title }}</v-card-title>
                     <v-card-subtitle>{{
@@ -181,90 +194,57 @@ watch(tab, (newTab) => {
                     <v-card-text>{{ annoucement.description }}</v-card-text>
 
                     <v-card-actions class="d-flex justify-space-between">
-                      <v-btn width="40%" class="btnSecondary"> Éditer </v-btn>
-                      <v-btn width="40%" class="btnPrimary" @click="deleteAnnouncement(annoucement.id)"> Supprimer </v-btn>
+                      <v-btn width="40%" class="btnSecondary" @click="updateAnnouncement(annoucement.id)"> Éditer
+                      </v-btn>
+                      <v-btn width="40%" class="btnPrimary" @click="deleteAnnouncement(annoucement.id)"> Supprimer
+                      </v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-col>
               </v-row>
             </v-col>
           </v-row>
+
           <v-row class="mt-6 d-flex justify-center" v-if="tab === 'addAnnonce'">
             <p class="mt-6" v-if="name == null || mail == null">
               Veuillez vous connecter
             </p>
             <v-col v-else md="6">
-              <v-form @submit.prevent = "requestsCreateAnnouncement">
-                <v-text-field
-                  v-model="inputTittle"
-                  :rules="formRules"
-                  label="Titre"
-                  required
-                ></v-text-field>
-                <v-select
-                  v-model="inputDepartment"
-                  :items="departementList"
-                  :rules="[v => !!v || 'Item is required']"
-                  label="Département"
-                  required
-                ></v-select>
-                <v-text-field
-                  v-model="inputDescription"
-                  :rules="rules"
-                  label="Description"
-                  required
-                ></v-text-field>
-                <v-file-input
-                  v-model="inputFile"
-                  label="Charger la photo"
-                  prepend-icon="mdi-camera"
-                  variant="filled"
-                ></v-file-input>
+              <v-form @submit.prevent="requestsCreateAnnouncement">
+                <v-text-field v-model="inputTittle" :rules="formRules" label="Titre" required></v-text-field>
+                <v-select v-model="inputDepartment" :items="departementList" :rules="[v => !!v || 'Item is required']"
+                  label="Département" required></v-select>
+                <v-text-field v-model="inputDescription" :rules="rules" label="Description" required></v-text-field>
+                <v-file-input v-model="inputFile" label="Charger la photo" prepend-icon="mdi-camera"
+                  variant="filled"></v-file-input>
                 <v-btn class="mt-2 btnPrimary" type="submit" block>Créer l'annonce</v-btn>
               </v-form>
             </v-col>
           </v-row>
         </v-col>
       </v-row>
-      <v-dialog
-        v-model="dialog"
-        width="auto"
-      >
-        <v-card
-          width="400"
-        >
+      <v-dialog v-model="dialog" width="auto">
+        <v-card width="400">
           <v-card-title>
             <v-row>
               <v-col cols="4">
-                <v-img
-                  :src="LogoAbeille"  
-                  max-width="40px"
-                  max-height="40px"
-                  class="rounded-lg"
-                />
+                <v-img :src="LogoAbeille" max-width="40px" max-height="40px" class="rounded-lg" />
               </v-col>
               <v-col cols="8">
                 <h3>{{ dialogTitle }}</h3>
               </v-col>
             </v-row>
-            
+
           </v-card-title>
           <v-card-text>
             <p>{{ dialogMessage }}</p>
           </v-card-text>
           <v-card-action class="d-flex justify-center">
-            <v-btn
-              class="ma-4"
-              text="Ok"
-              @click="dialog = false"
-            ></v-btn>
+            <v-btn class="ma-4" text="Ok" @click="dialog = false"></v-btn>
           </v-card-action>
         </v-card>
       </v-dialog>
-      <ProgressCircular
-        :isLoading="isLoading"
-        :chargingMessage="chargingMessage"
-      />
+      <ProgressCircular :isLoading="isLoading" :chargingMessage="chargingMessage" />
     </v-container>
     <Footer />
   </v-app>
@@ -277,4 +257,3 @@ watch(tab, (newTab) => {
   height: 100vh;
 }
 </style>
-
