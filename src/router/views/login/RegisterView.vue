@@ -1,6 +1,6 @@
 <script setup>
 import { useUserStore } from "@/stores/useUserStore";
-import Footer from "@/components/Footer.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
 import { ref } from "vue";
 import beesPlacesRequests from "@/services/beesPlacesRequests";
 import { useRouter } from "vue-router";
@@ -180,7 +180,7 @@ const pressEnter = () => {
       <p class="progressCircularText">{{ charginMessage }}</p>
     </div>
   </v-container>
-  <Footer />
+  <FooterComponent />
   </v-app>
 </template>
 

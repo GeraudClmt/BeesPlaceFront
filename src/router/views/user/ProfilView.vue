@@ -1,6 +1,6 @@
 <script setup>
-import NavBar from "@/components/NavBar.vue";
-import Footer from "@/components/Footer.vue";
+import NavBarComponent from "@/components/NavBarComponent.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
 import { ref, onMounted, watch } from "vue";
 import { useUserStore } from "@/stores/useUserStore";
 import beesPlacesRequests from "@/services/beesPlacesRequests";
@@ -65,7 +65,7 @@ const fetchUserAnnoucements = async () => {
     annoucementsList.value = response.data.annonces;
 
     chargingMessage.value = "Réception des données...";
-  } catch (error) {
+  } catch{
     chargingMessage.value = "Erreur réception des données";
   }
   setTimeout(() => {
@@ -153,7 +153,7 @@ watch(tab, (newTab) => {
 
 <template>
   <v-app>
-    <NavBar />
+    <NavBarComponent />
     <v-container class="flex-grow-1">
       <v-row class="d-flex justify-center">
         <v-col class="bgWhite elevation-5 pa-6" cols="11" md="11">
@@ -246,7 +246,7 @@ watch(tab, (newTab) => {
       </v-dialog>
       <ProgressCircular :isLoading="isLoading" :chargingMessage="chargingMessage" />
     </v-container>
-    <Footer />
+    <FooterComponent />
   </v-app>
 </template>
 

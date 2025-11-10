@@ -1,6 +1,6 @@
 <script setup>
 import BeesPlacesRequests from "@/services/beesPlacesRequests";
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 
 const props = defineProps({
   id: {
@@ -28,6 +28,12 @@ const department = ref();
 const description = ref();
 const inputFile = ref();
 const imagePreview = ref();
+
+
+const isDialogActivateLocal = computed({
+  get: () => props.isDialogActivate,
+  set: () => closeDialog()
+});
 
 const fetchAnnoucementById = async () => {
   try {
@@ -86,7 +92,7 @@ const closeDialog = () => {
 
 <template>
   <v-container>
-    <v-dialog v-model="props.isDialogActivate" width="auto">
+    <v-dialog v-model="isDialogActivateLocal" width="auto">
       <v-card class="pa-5">
         <v-card-title>
           Modification de l'annonce
