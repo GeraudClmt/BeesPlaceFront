@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import NavBar from "@/components/NavBar.vue";
-import Footer from "@/components/Footer.vue";
+import NavBarComponent from "@/components/NavBarComponent.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
 import beesPlacesRequests from "@/services/beesPlacesRequests";
 import ProgressCircular from "@/components/ProgressCircular.vue";
 
@@ -16,7 +16,7 @@ const fetchAnnoucements = async () => {
     annoucementsList.value = response.data.announcements;
 
     chargingMessage.value = "Réception des données...";
-  } catch (error) {
+  } catch {
     chargingMessage.value = "Erreur réception des données";
   }
   setTimeout(() => {
@@ -29,7 +29,7 @@ fetchAnnoucements();
 
 <template>
   <v-app>
-    <NavBar />
+    <NavBarComponent />
     <v-container class="flex-grow-1">
       <v-row>
         <v-col
@@ -68,7 +68,7 @@ fetchAnnoucements();
         :chargingMessage="chargingMessage"
       />
     </v-container>
-    <Footer />
+    <FooterComponent />
   </v-app>
 </template>
 

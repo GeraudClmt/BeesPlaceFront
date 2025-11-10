@@ -1,41 +1,41 @@
 import { createRouter, createWebHashHistory } from "vue-router"
-import Accueil from "@/router/views/Index.vue"
-import Login from "@/router/views/login/Login.vue"
-import Register from '@/router/views/login/Register.vue'
-import ForgotPassword from '@/router/views/login/ForgotPassword.vue'
-import Catalog from "@/router/views/catalog/Catalog.vue"
-import Profile from "@/router/views/user/Profil.vue"
+import IndexView from "@/router/views/IndexView.vue"
+import LoginView from "@/router/views/login/LoginView.vue"
+import RegisterView from '@/router/views/login/RegisterView.vue'
+import ForgotPasswordView from '@/router/views/login/ForgotPasswordView.vue'
+import CatalogView from "@/router/views/catalog/CatalogView.vue"
+import ProfileView from "@/router/views/user/ProfilView.vue"
 
 const routes = [
     {
         path: '/',
         name: 'Accueil',
-        component: Accueil
+        component: IndexView
     },
     {
         path: '/login',
         name: 'Connexion',
-        component: Login
+        component: LoginView
     },
     {
         path: '/register',
         name: 'Creation de compte',
-        component: Register
+        component: RegisterView
     },
     {
         path: '/forgot',
         name: 'Récupération du mot de passe',
-        component: ForgotPassword
+        component: ForgotPasswordView
     },
     {
         path: '/catalog',
         name: 'Cathalogue',
-        component: Catalog
+        component: CatalogView
     },
     {
         path: '/profil',
         name: 'Profil',
-        component: Profile
+        component: ProfileView
     }
 ]
 

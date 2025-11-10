@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from "vue";
-import NavBar from "@/components/NavBar.vue";
-import Footer from "@/components/Footer.vue";
+import NavBarComponent from "@/components/NavBarComponent.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
 import { useRouter } from "vue-router";
 
 const router = new useRouter();
@@ -16,7 +16,7 @@ const redirectToCatalog = () => {
 
 <template>
   <v-app>
-    <NavBar />
+    <NavBarComponent />
     <v-main>
       <v-container>
         <v-row class="d-flex justify-center">
@@ -176,7 +176,7 @@ const redirectToCatalog = () => {
         </v-row>
       </v-container>
     </v-main>
-    <Footer />
+    <FooterComponent />
   </v-app>
 </template>
 
