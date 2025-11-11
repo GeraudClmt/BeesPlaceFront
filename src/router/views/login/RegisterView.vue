@@ -17,7 +17,7 @@ const name = ref("");
 const phone = ref("");
 
 const rulesEmail = [
-  (value) => !!value || "Required",
+  (value) => !!value || "Nécessaire",
   (value) => /.+@.+\..+/.test(value) || "Doit être un email valide",
 ];
 const rulesPassword = [
@@ -28,7 +28,7 @@ const rulesPasswordConfirm = [
   (value) => !!value || "Required",
   (value) => value == password.value || "Mot de passe non identique",
 ];
-const rulesName = [(value) => !!value || "Required"];
+const rulesName = [(value) => !!value || "Nécessaire"];
 
 const register = () => {
   isLoading.value = true;
